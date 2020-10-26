@@ -10,8 +10,12 @@ Having built an [Ergodox](https://www.ergodox.io/) keyboard from scratch a few y
 
 1. Access to a 3d printer for case. I personally own a [ANYCUBIC i3 Mega S](https://www.amazon.de/dp/B07KCGN34W), and used that.
 
-1. Cherry compatible key switches. Here, you can go crazy. I ordered mine from [CANDYKEYS](https://candykeys.com/category:switches). I personally used [Cherry MX Blue](https://candykeys.com/product/cherry-mx-blue-plate-m).
+1. Cherry compatible key switches. Here, you can go crazy. I ordered mine from [CANDYKEYS](https://candykeys.com/category:switches).Personally, I prefer [Cherry MX Blue](https://candykeys.com/product/cherry-mx-blue-plate-m).
 
 1. Keycaps. I ordered mine from [AliExpress](https://de.aliexpress.com/). Any of the suppliers will do; just make sure they are cherry-compatible. Personally, I ordered a bunch of [random colors from this seller](https://de.aliexpress.com/item/4000480076757.html). Mine took about a month to arrive.
 
-1. Soldering iron. I used [this cheap one](https://www.amazon.de/-/en/gp/product/B07WYLF6QV/). Any would do, just be careful with it. 
+1. Soldering iron. I used [this cheap one](https://www.amazon.de/-/en/gp/product/B07WYLF6QV/). Any would do, just be careful with it.
+
+1. Any micro-usb cable.
+
+1. [Arduino Pro Micro 5v/16MHz](https://www.sparkfun.com/products/12640). A good guide that I referred to constantly during this project is their excellent [Hookup Guide](https://learn.sparkfun.com/tutorials/pro-micro--fio-v3-hookup-guide). I bought mine from [CANDYKES](https://candykeys.com/product/pro-micro-5v-16mhz).
