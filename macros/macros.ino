@@ -3,10 +3,11 @@
 byte RXLED = 17;
 bool flagLED = false;
 
-int keys[] = {2, 3, 4, 
-              5, 6, 7, 
-              8, 9, 10, 16, 
-              14, 15, 18, 19};
+// pin layout as wired
+int keys[] = {15, 8, 9,
+              10, 5, 6,
+              7, 4, 3, 2,
+              14, 18, 19, 16};
 int numberTotalKeys = (sizeof(keys) / sizeof(keys[0]));
 
 int modifierSequence[] = {KEY_LEFT_SHIFT, 
@@ -15,7 +16,7 @@ int modifierSequence[] = {KEY_LEFT_SHIFT,
                           KEY_LEFT_GUI};
 int lenModifierSequence = (sizeof(modifierSequence) / sizeof(modifierSequence[0]));
 
-
+// setup does one time initialization
 void setup() {
 
   pinMode(RXLED, OUTPUT);
@@ -34,6 +35,7 @@ void setup() {
   Keyboard.begin();
 }
 
+// loop is the one that does actual work
 void loop() {
 
   for (int i = 0; i < numberTotalKeys; i++) {
@@ -46,6 +48,8 @@ void loop() {
   }
 }
 
+// sendModifierSequence sends modifier keys set in 
+// modifierSequence array
 void sendModifierSequence () {
   
   for (int i = 0; i < lenModifierSequence; i++) {
@@ -75,60 +79,24 @@ void handleKeyStroke (int keyIndex) {
   sendModifierSequence();
 
   switch (keyIndex) {
-    case 0:
-      Keyboard.press('9');
-      break;
-
-    case 1:
-      Keyboard.press('8');
-      break;
-
-    case 2:
-      Keyboard.press('7');
-      break;
-
-    case 3:
-      Keyboard.press('4');
-      break;
-
-    case 4:
-      Keyboard.press('5');
-      break;
-
-    case 5:
-      Keyboard.press('6');
-      break;
-
-    case 6:
-      Keyboard.press('1');
-      break;
-
-    case 7:
-      Keyboard.press('2');
-      break;
-
-    case 8:
-      Keyboard.press('3');
-      break;
-
-    case 9:
-      Keyboard.press('d');
-      break;
-
     case 10:
       Keyboard.press('a');
       break;
 
     case 11:
-      Keyboard.press('0');
-      break;
-
-    case 12:
       Keyboard.press('b');
       break;
 
-    case 13:
+    case 12:
       Keyboard.press('c');
+      break;
+
+    case 13:
+      Keyboard.press('d');
+      break;
+
+    default:
+      Keyboard.press(keyIndex);
       break;
   }
 
