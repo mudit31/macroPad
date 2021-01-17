@@ -15,6 +15,7 @@ int modifierSequence[] = {KEY_LEFT_SHIFT,
                           KEY_LEFT_GUI};
 int lenModifierSequence = (sizeof(modifierSequence) / sizeof(modifierSequence[0]));
 
+
 void setup() {
 
   pinMode(RXLED, OUTPUT);
@@ -56,84 +57,69 @@ void handleKeyStroke (int keyIndex) {
 
   /*
      the layout looks like:
-     02 01 00 ..
-     03 04 05 ..
-     06 07 08 09
-     11 10 12 13
+     07 08 09 ..
+     04 05 06 ..
+     01 02 03  d
+     00  a  b  c
   */
 
   sendModifierSequence();
 
   switch (keyIndex) {
     case 0:
-      // shortcut: shift ctrl alt gui 0
-      Keyboard.press('0');
+      Keyboard.press('9');
       break;
 
     case 1:
-      // shortcut: shift ctrl alt gui 1
-      Keyboard.press('1');
-      break;
-
-    case 2:
-      // shortcut: shift ctrl alt gui 2
-      Keyboard.press('2');
-      break;
-
-    case 3:
-      // shortcut: shift ctrl alt gui 3
-      Keyboard.press('3');
-      break;
-
-    case 4:
-      // shortcut: shift ctrl alt gui 4
-      Keyboard.press('4');
-      break;
-
-    case 5:
-      // shortcut: shift ctrl alt gui 5
-      Keyboard.press('5');
-      break;
-
-    case 6:
-      // shortcut: shift ctrl alt gui 6
-      Keyboard.press('6');
-      break;
-
-    case 7:
-      // shortcut: shift ctrl alt gui 7
-      Keyboard.press('7');
-      break;
-
-    case 8:
-      // shortcut: shift ctrl alt gui 8
       Keyboard.press('8');
       break;
 
+    case 2:
+      Keyboard.press('7');
+      break;
+
+    case 3:
+      Keyboard.press('4');
+      break;
+
+    case 4:
+      Keyboard.press('5');
+      break;
+
+    case 5:
+      Keyboard.press('6');
+      break;
+
+    case 6:
+      Keyboard.press('1');
+      break;
+
+    case 7:
+      Keyboard.press('2');
+      break;
+
+    case 8:
+      Keyboard.press('3');
+      break;
+
     case 9:
-      // shortcut for locking windows: win l
-      Keyboard.press(KEY_LEFT_GUI);
-      Keyboard.press('l');
+      Keyboard.press('d');
       break;
 
     case 10:
-      // shortcut: shift ctrl alt gui a
       Keyboard.press('a');
       break;
 
     case 11:
-      // shortcut: shift ctrl alt gui b
-      Keyboard.press('b');
+      Keyboard.press('0');
       break;
 
     case 12:
-      // shortcut: shift ctrl alt gui c
-      Keyboard.press('c');
+      Keyboard.press('b');
       break;
 
     case 13:
-      // shortcut for locking mac: shift command l
-      Keyboard.press('l');
+      Keyboard.press('c');
       break;
   }
 
