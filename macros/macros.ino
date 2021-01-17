@@ -3,10 +3,11 @@
 byte RXLED = 17;
 bool flagLED = false;
 
-int numberTotalKeys = 14;
-int keys[] = {2, 3, 4, 5, 6, 7, 8, 9,
-              10, 16, 14, 15, 18, 19
-             };
+int keys[] = {2, 3, 4, 
+              5, 6, 7, 
+              8, 9, 10, 16, 
+              14, 15, 18, 19};
+int numberTotalKeys = (sizeof(keys) / sizeof(keys[0]));
 
 void setup() {
 
@@ -18,7 +19,7 @@ void setup() {
   Serial1.begin(9600);
   Serial1.println("Initialize Serial Hardware UART Pins");
 
-  for (int i = 0; i <= numberTotalKeys; i++) {
+  for (int i = 0; i < numberTotalKeys; i++) {
     pinMode(keys[i], INPUT);
     digitalWrite(keys[i], HIGH);
   }
@@ -28,7 +29,7 @@ void setup() {
 
 void loop() {
 
-  for (int i = 0; i <= numberTotalKeys; i++) {
+  for (int i = 0; i < numberTotalKeys; i++) {
     if (digitalRead(keys[i]) == LOW) {
 
       digitalWrite(RXLED, HIGH);
