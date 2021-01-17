@@ -62,6 +62,15 @@ void handleKeyStroke (int keyIndex) {
      01 02 03  d
      00  a  b  c
   */
+  // when shift ctrl alt gui + f is set to finder on macos,
+  // this opens finder first, and then executes the macro. 
+  // this helps keep the macro from executing any application
+  // specific shorcuts.
+  // this only helps when the macropad is used to launch applications.
+  sendModifierSequence();
+  Keyboard.press('f');
+  delay(100);
+  Keyboard.releaseAll();
 
   sendModifierSequence();
 
