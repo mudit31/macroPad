@@ -1,7 +1,11 @@
 #include <Keyboard.h>
+#include <Mouse.h>
 
 byte RXLED = 17;
-bool flagLED = false;
+
+bool mouseShakerFlipfop = false;
+bool mouseShakerOnOff = false;
+int mouseMovementSize = 8; // -128 and +127
 
 // pin layout as wired
 int keys[] = {15, 8, 9,
@@ -33,17 +37,26 @@ void setup() {
   }
 
   Keyboard.begin();
+  Mouse.begin();
 }
 
 // loop is the one that does actual work
 void loop() {
 
+  if (mouseShakerOnOff) {
+    mouseShakerFlipfop = !mouseShakerFlipfop;
+
+    if (mouseShakerFlipfop){
+      Mouse.move(mouseMovementSize, mouseMovementSize, 0);
+    } else {
+      Mouse.move((-1 * mouseMovementSize), (-1 * mouseMovementSize), 0);
+    }
+    delay(100);
+  }
+
   for (int i = 0; i < numberTotalKeys; i++) {
     if (digitalRead(keys[i]) == LOW) {
-
-      digitalWrite(RXLED, HIGH);
       handleKeyStroke(i);
-      digitalWrite(RXLED, LOW);
     }
   }
 }
@@ -55,6 +68,14 @@ void sendModifierSequence () {
   for (int i = 0; i < lenModifierSequence; i++) {
     Keyboard.press(modifierSequence[i]);
   }
+}
+
+void turnLEDOn () {
+  digitalWrite(RXLED, LOW);
+}
+
+void turnLEDOff () {
+  digitalWrite(RXLED, HIGH);
 }
 
 void handleKeyStroke (int keyIndex) {
@@ -93,6 +114,12 @@ void handleKeyStroke (int keyIndex) {
 
     case 13:
       Keyboard.press('d');
+      mouseShakerOnOff = !mouseShakerOnOff;
+      if (mouseShakerOnOff) {
+        turnLEDOn();
+      } else {
+        turnLEDOff();
+      }
       break;
 
     default:
