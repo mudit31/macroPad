@@ -5,12 +5,12 @@ byte RXLED = 17;
 
 bool mouseShakerFlipfop = false;
 bool mouseShakerOnOff = false;
-int mouseMovementSize = 8; // -128 and +127
+int mouseMovementSize = 8; // between -128 and +127
 
 // pin layout as wired
-int keys[] = {15, 8, 9,
-              10, 5, 6,
-              7, 4, 3, 2,
+int keys[] = {15,  8,  9,
+              10,  5,  6,
+               7,  4,  3,  2,
               14, 18, 19, 16};
 int numberTotalKeys = (sizeof(keys) / sizeof(keys[0]));
 
@@ -43,6 +43,16 @@ void setup() {
 // loop is the one that does actual work
 void loop() {
 
+  for (int i = 0; i < numberTotalKeys; i++) {
+    if (digitalRead(keys[i]) == LOW) {
+      handleKeyStroke(i);
+    }
+  }
+
+  voidHandleMouseVibrator();
+}
+
+vpod voidHandleMouseVibrator () {
   if (mouseShakerOnOff) {
     mouseShakerFlipfop = !mouseShakerFlipfop;
 
@@ -51,18 +61,11 @@ void loop() {
     } else {
       Mouse.move((-1 * mouseMovementSize), (-1 * mouseMovementSize), 0);
     }
-    delay(100);
-  }
-
-  for (int i = 0; i < numberTotalKeys; i++) {
-    if (digitalRead(keys[i]) == LOW) {
-      handleKeyStroke(i);
-    }
-  }
+    delay(200);
+  }  
 }
 
 void handleKeyStroke (int keyIndex) {
-
   /*
      the layout looks like:
       7  8  9
@@ -70,6 +73,7 @@ void handleKeyStroke (int keyIndex) {
       1  2  3  d
       0  a  b  c
   */
+
   switch (keyIndex) {
     case 10:
       sendKeyCode('a');
@@ -90,12 +94,14 @@ void handleKeyStroke (int keyIndex) {
       } else {
         turnLEDOff();
       }
+      Serial.println(mouseShakerOnOff);
       break;
 
     default:
       sendKeyCode(keyIndex);
       break;
   }
+  delay(500);
 }
 
 void sendKeyCode (char keyToSend) {
@@ -103,8 +109,8 @@ void sendKeyCode (char keyToSend) {
 
   Keyboard.press(keyToSend);
 
-  delay(100);
-  Keyboard.releaseAll();  
+  delay(500);
+  Keyboard.releaseAll();
 }
 
 // sendModifierSequence sends modifier keys set in 
@@ -113,6 +119,8 @@ void sendModifierSequence () {
   for (int i = 0; i < lenModifierSequence; i++) {
     Keyboard.press(modifierSequence[i]);
   }
+  delay(500);
+  Keyboard.releaseAll();
 }
 
 void turnLEDOn () {
