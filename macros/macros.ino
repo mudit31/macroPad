@@ -61,10 +61,55 @@ void loop() {
   }
 }
 
+void handleKeyStroke (int keyIndex) {
+
+  /*
+     the layout looks like:
+      7  8  9
+      4  5  6
+      1  2  3  d
+      0  a  b  c
+  */
+  switch (keyIndex) {
+    case 10:
+      sendKeyCode('a');
+      break;
+
+    case 11:
+      sendKeyCode('b');
+      break;
+
+    case 12:
+      sendKeyCode('c');
+      break;
+
+    case 13:
+      mouseShakerOnOff = !mouseShakerOnOff;
+      if (mouseShakerOnOff) {
+        turnLEDOn();
+      } else {
+        turnLEDOff();
+      }
+      break;
+
+    default:
+      sendKeyCode(keyIndex);
+      break;
+  }
+}
+
+void sendKeyCode (char keyToSend) {
+  sendModifierSequence();
+
+  Keyboard.press(keyToSend);
+
+  delay(100);
+  Keyboard.releaseAll();  
+}
+
 // sendModifierSequence sends modifier keys set in 
 // modifierSequence array
-void sendModifierSequence () {
-  
+void sendModifierSequence () {  
   for (int i = 0; i < lenModifierSequence; i++) {
     Keyboard.press(modifierSequence[i]);
   }
@@ -76,57 +121,4 @@ void turnLEDOn () {
 
 void turnLEDOff () {
   digitalWrite(RXLED, HIGH);
-}
-
-void handleKeyStroke (int keyIndex) {
-
-  /*
-     the layout looks like:
-     07 08 09 ..
-     04 05 06 ..
-     01 02 03  d
-     00  a  b  c
-  */
-  // when shift ctrl alt gui + f is set to finder on macos,
-  // this opens finder first, and then executes the macro. 
-  // this helps keep the macro from executing any application
-  // specific shorcuts.
-  // this only helps when the macropad is used to launch applications.
-  sendModifierSequence();
-  Keyboard.press('f');
-  delay(100);
-  Keyboard.releaseAll();
-
-  sendModifierSequence();
-
-  switch (keyIndex) {
-    case 10:
-      Keyboard.press('a');
-      break;
-
-    case 11:
-      Keyboard.press('b');
-      break;
-
-    case 12:
-      Keyboard.press('c');
-      break;
-
-    case 13:
-      Keyboard.press('d');
-      mouseShakerOnOff = !mouseShakerOnOff;
-      if (mouseShakerOnOff) {
-        turnLEDOn();
-      } else {
-        turnLEDOff();
-      }
-      break;
-
-    default:
-      Keyboard.press(keyIndex);
-      break;
-  }
-
-  delay(100);
-  Keyboard.releaseAll();
 }
