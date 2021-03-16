@@ -13,6 +13,7 @@ int keys[] = {15,  8,  9,
                7,  4,  3,  2,
               14, 18, 19, 16};
 int numberTotalKeys = (sizeof(keys) / sizeof(keys[0]));
+int numAsciiDifference = 48; // ascii code of '0' character
 
 int modifierSequence[] = {KEY_LEFT_SHIFT, 
                           KEY_LEFT_CTRL, 
@@ -52,7 +53,7 @@ void loop() {
   voidHandleMouseVibrator();
 }
 
-vpod voidHandleMouseVibrator () {
+void voidHandleMouseVibrator () {
   if (mouseShakerOnOff) {
     mouseShakerFlipfop = !mouseShakerFlipfop;
 
@@ -98,7 +99,7 @@ void handleKeyStroke (int keyIndex) {
       break;
 
     default:
-      sendKeyCode(keyIndex);
+      sendKeyCode(keyIndex + numAsciiDifference);
       break;
   }
   delay(500);
