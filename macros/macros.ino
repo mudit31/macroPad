@@ -120,8 +120,6 @@ void sendModifierSequence () {
   for (int i = 0; i < lenModifierSequence; i++) {
     Keyboard.press(modifierSequence[i]);
   }
-  delay(500);
-  Keyboard.releaseAll();
 }
 
 void turnLEDOn () {
